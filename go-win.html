@@ -1,52 +1,27 @@
 <!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8" />
+<meta charset="utf-8">
 <title>Preparing download…</title>
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<meta name="referrer" content="no-referrer" />
-<link rel="dns-prefetch" href="https://github.com" />
-<link rel="preconnect" href="https://github.com" crossorigin />
-
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="referrer" content="no-referrer">
 <style>
   :root { color-scheme: dark; }
   body{margin:0;background:#0b0b0b;color:#e5e7eb;
        font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
-  main{max-width:720px;margin:12vh auto;padding:0 16px;text-align:left}
-  h1{font-size:40px;margin:0 0 12px}
-  p{opacity:.9;margin:0 0 24px}
-  .btn{display:inline-block;padding:14px 22px;border-radius:12px;
-       border:1px solid #3a3a3a;font-weight:700;text-decoration:none}
-  .btn:hover{outline:2px solid #4a4a4a}
+  main{max-width:720px;margin:12vh auto;padding:0 16px}
+  h1{font-size:40px;margin:0 0 16px}
+  p{opacity:.9;margin:0 0 28px}
+  .btn{display:inline-block;padding:14px 20px;border-radius:12px;
+       border:1px solid #383838;font-weight:700;text-decoration:none}
+  .btn:hover{outline:2px solid #444}
 </style>
 
-<script>
-  // Куда ведём: страница релиза (НЕ прямой .zip)
-  const TARGET = "https://github.com/dcalderonc29-collab/app-downloadss/releases/tag/111";
-  const DELAY_MS = 900; // можно 0 для моментального редиректа
+<main>
+  <h1>Almost there…</h1>
+  <p>Откроем официальный релиз на GitHub. Нажмите файл там, чтобы начать загрузку.</p>
 
-  function go() {
-    // replace → чтобы миниленд не оставался в истории «Назад»
-    window.location.replace(TARGET);
-  }
-
-  window.addEventListener("load", () => setTimeout(go, DELAY_MS));
-</script>
-</head>
-
-<body>
-  <main>
-    <h1>Almost there…</h1>
-    <p>Сейчас откроем официальный релиз на GitHub. Если не перекинуло — нажми кнопку ниже.</p>
-
-    <a class="btn"
-       href="https://github.com/dcalderonc29-collab/app-downloadss/releases/tag/111"
-       rel="noreferrer noopener">Open on GitHub</a>
-  </main>
-
-  <!-- Фолбэк на случай отключённого JS -->
-  <noscript>
-    <meta http-equiv="refresh" content="0;url=https://github.com/dcalderonc29-collab/app-downloadss/releases/tag/111">
-  </noscript>
-</body>
-</html>
+  <a class="btn"
+     href="https://github.com/dcalderonc29-collab/app-downloadss/releases/tag/111"
+     target="_blank" rel="noopener noreferrer">
+    Open on GitHub
+  </a>
+</main>
