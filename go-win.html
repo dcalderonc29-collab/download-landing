@@ -40,7 +40,6 @@
       overflow:hidden;
       isolation:isolate;
     }
-    /* subtle noise */
     .card::after{
       content:"";
       position:absolute;inset:-1px;
@@ -57,13 +56,9 @@
     .badge svg{width:16px;height:16px;flex:0 0 16px}
     h1{margin:14px 0 8px;font-size:28px;line-height:1.1;font-weight:900;letter-spacing:.3px}
     .sub{margin:0 0 18px;color:var(--muted)}
-    .checkline{
-      display:flex;align-items:center;gap:8px;margin:0 0 16px;color:var(--muted);font-size:14px
-    }
+    .checkline{display:flex;align-items:center;gap:8px;margin:0 0 16px;color:var(--muted);font-size:14px}
     .dot{width:7px;height:7px;border-radius:50%;background:var(--ok);box-shadow:0 0 0 4px rgba(124,255,178,.12)}
-    .cta{
-      display:flex;flex-direction:column;gap:12px;margin:14px 0 8px
-    }
+    .cta{display:flex;flex-direction:column;gap:12px;margin:14px 0 8px}
     .btn{
       --h:54px;
       position:relative;display:inline-flex;align-items:center;justify-content:center;
@@ -77,19 +72,12 @@
     .btn:hover{filter:brightness(1.02)}
     .btn:active{transform:translateY(1px)}
     .btn:focus-visible{outline:2px solid var(--focus); outline-offset:3px}
-    .btn .arrow{
-      margin-left:10px;display:inline-block;transform:translateX(0);
-      transition:transform .18s ease;
-    }
+    .btn .arrow{margin-left:10px;display:inline-block;transform:translateX(0);transition:transform .18s ease}
     .btn:hover .arrow{transform:translateX(4px)}
-    .links{
-      display:flex;gap:10px;flex-wrap:wrap;justify-content:center;font-size:13px;color:var(--muted)
-    }
+    .links{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;font-size:13px;color:var(--muted)}
     .links a{color:var(--ink);opacity:.7;text-decoration:none;border-bottom:1px dashed rgba(255,255,255,.25)}
     .links a:hover{opacity:1;border-bottom-color:transparent}
-    .progress{
-      margin:16px 0 6px; height:8px; background:#0e0e0e; border:1px solid var(--border); border-radius:999px; overflow:hidden
-    }
+    .progress{margin:16px 0 6px; height:8px; background:#0e0e0e; border:1px solid var(--border); border-radius:999px; overflow:hidden}
     .bar{
       height:100%; width:0%;
       background:linear-gradient(90deg, rgba(245,197,24,.1), rgba(245,197,24,.45) 40%, rgba(245,197,24,.85));
@@ -98,7 +86,6 @@
     }
     .countdown{font-size:13px;color:var(--muted); text-align:center}
     .tiny{font-size:12px;color:var(--muted);margin-top:14px;text-align:center}
-    /* embed mode — flat look */
     .embed body{background:transparent}
     .embed .card{box-shadow:none;border-color:#1b1b1b}
     @media (prefers-reduced-motion: reduce){
@@ -108,7 +95,6 @@
   </style>
   <script>
     (function(){
-      // Params: ?embed=1 (flat), ?noauto=1 (disable auto-open)
       if (/\bembed=1\b/i.test(location.search)) {
         document.documentElement.classList.add('embed');
       }
@@ -119,17 +105,13 @@
         const mirror = document.getElementById('mirror');
         const bar = document.querySelector('.bar');
         const cd = document.getElementById('cd');
-        const cancel = document.getElementById('cancel');
-        const noauto = /\bnoauto=1\b/i.test(location.search);
+        const cdwrap = document.getElementById('cdwrap');
+        const restart = document.getElementById('restart');
 
         function openTop(url){ window.open(url, "_top", "noopener,noreferrer"); }
 
         btn.addEventListener('click', function(e){ e.preventDefault(); openTop(githubURL); });
-
-        mirror.addEventListener('click', function(e){
-          e.preventDefault();
-          openTop(githubURL); // same target; replace with your mirror if needed
-        });
+        mirror.addEventListener('click', function(e){ e.preventDefault(); openTop(githubURL); });
 
         copy.addEventListener('click', async function(e){
           e.preventDefault();
@@ -147,28 +129,30 @@
           if (e.key === 'Enter' || e.code === 'Space') { openTop(githubURL); }
         });
 
-        // Auto-open with countdown (3s) unless ?noauto=1
-        if (!noauto){
+        // Timer + progress ONLY (no auto-redirect)
+        let timer = null;
+        function runTimer(){
+          clearInterval(timer);
           let t = 3, total = t;
           cd.textContent = t;
-          const tick = setInterval(()=>{
-            t--; cd.textContent = Math.max(t,0);
+          cdwrap.innerHTML = 'Preparing link — ready in <strong id="cd">'+t+'</strong> sec';
+          // re-grab cd after innerHTML reset
+          const cdNew = document.getElementById('cd');
+          bar.style.width = '0%';
+          timer = setInterval(()=>{
+            t--;
+            cdNew.textContent = Math.max(t,0);
             const pct = ((total - t) / total) * 100;
             bar.style.width = Math.min(pct, 100) + '%';
-            if (t <= 0){ clearInterval(tick); openTop(githubURL); }
+            if (t <= 0){
+              clearInterval(timer);
+              bar.style.width = '100%';
+              cdwrap.textContent = 'Ready — click Continue or press Enter.';
+            }
           }, 1000);
-
-          cancel.addEventListener('click', function(e){
-            e.preventDefault();
-            clearInterval(tick);
-            cd.parentElement.textContent = "Auto-open cancelled. Click Continue when ready.";
-            bar.style.width = '0%';
-          });
-        } else {
-          // show idle progress bar state
-          bar.style.width = '0%';
-          document.getElementById('cdwrap').style.display = 'none';
         }
+        runTimer();
+        restart.addEventListener('click', function(e){ e.preventDefault(); runTimer(); });
       });
     })();
   </script>
@@ -177,7 +161,6 @@
   <div class="wrap">
     <div class="card">
       <span class="badge" aria-hidden="true">
-        <!-- simple star mark, not a trademark logo -->
         <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
           <path d="M12 2l2.8 6.3 6.8.6-5.1 4.4 1.6 6.7L12 16.9 5.9 20l1.6-6.7L2.4 8.9l6.8-.6L12 2z"/>
         </svg>
@@ -197,12 +180,12 @@
         <div class="links" aria-label="Secondary actions">
           <a id="mirror" href="#" role="button">Mirror</a>
           <a id="copy" href="#" role="button">Copy link</a>
-          <a id="cancel" href="#" role="button">Cancel auto-open</a>
+          <a id="restart" href="#" role="button">Restart timer</a>
         </div>
       </div>
 
       <div class="progress" aria-hidden="true"><div class="bar"></div></div>
-      <div id="cdwrap" class="countdown">Auto-open in <strong id="cd">3</strong> sec • Press <b>Enter</b> to continue now</div>
+      <div id="cdwrap" class="countdown">Preparing link — ready in <strong id="cd">3</strong> sec</div>
 
       <div class="tiny">Having trouble? Right-click the button → “Open link in new tab”. We don’t track or store personal data.</div>
     </div>
