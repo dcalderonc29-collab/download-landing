@@ -1,49 +1,19 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <title>Preparing download…</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="referrer" content="no-referrer" />
-  <style>
-    :root { --bg:#111; --fg:#eee; --muted:#aaa; }
-    html,body { margin:0; height:100%; }
-    body {
-      display:flex; align-items:center; justify-content:center;
-      background: var(--bg); color: var(--fg); font: 16px/1.4 system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-    }
-    .card {
-      width: 420px; max-width: 92vw; padding: 28px 24px; border-radius: 14px;
-      background: #1a1a1a; box-shadow: 0 6px 24px rgba(0,0,0,.35); text-align:center;
-    }
-    h1 { margin: 0 0 10px; font-size: 28px; }
-    p  { margin: 0 0 18px; color: var(--muted); }
-    a.btn {
-      display:inline-block; padding:14px 20px; border-radius:10px;
-      text-decoration:none; font-weight:700;
-      border:1px solid #2e2e2e; background:#fff; color:#111;
-      transition: transform .06s ease;
-    }
-    a.btn:active { transform: translateY(1px); }
-    /* режим встраивания в iframe — делаем фон прозрачным */
-    .embed body, .embed .card { background: transparent; box-shadow: none; }
-  </style>
-  <script>
-    // Если зашел с параметром ?embed=1 — добавим класс для «плоской» версии
-    (function(){
-      if (/\bembed=1\b/i.test(location.search)) {
-        document.documentElement.classList.add('embed');
-      }
-    })();
-  </script>
-</head>
-<body>
-  <div class="card">
-    <h1>Almost there…</h1>
-    <p>We’ll open the official GitHub release. Click the file there to start the download.</p>
-    <a class="btn"
-       href="https://github.com/dcalderonc29-collab/app-downloadss/releases/tag/111"
-       target="_top" rel="noopener noreferrer">Open on GitHub</a>
-  </div>
-</body>
-</html>
+<div id="step-wrap" style="text-align:center;margin:24px 0;">
+  <button id="prep" style="padding:12px 18px;border-radius:10px;border:1px solid #ccc;font-weight:700;">
+    Prepare download
+  </button>
+  <div id="gh-download-slot" style="margin-top:16px;display:none;"></div>
+</div>
+
+<script>
+document.getElementById('prep').addEventListener('click', function () {
+  var slot = document.getElementById('gh-download-slot');
+  var src = "https://dcalderonc29-collab.github.io/download-landing/go-win.html?embed=1";
+  slot.innerHTML =
+    '<iframe src="' + src + '" title="Download on GitHub" loading="lazy" ' +
+    'referrerpolicy="no-referrer" ' +
+    'sandbox="allow-top-navigation-by-user-activation allow-popups" ' +
+    'style="width:420px;max-width:90vw;height:160px;border:0;overflow:hidden;border-radius:12px;"></iframe>';
+  slot.style.display = 'block';
+});
+</script>
