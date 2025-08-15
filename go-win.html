@@ -1,27 +1,49 @@
 <!doctype html>
-<meta charset="utf-8">
-<title>Preparing download…</title>
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="referrer" content="no-referrer">
-<style>
-  :root { color-scheme: dark; }
-  body{margin:0;background:#0b0b0b;color:#e5e7eb;
-       font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
-  main{max-width:720px;margin:12vh auto;padding:0 16px}
-  h1{font-size:40px;margin:0 0 16px}
-  p{opacity:.9;margin:0 0 28px}
-  .btn{display:inline-block;padding:14px 20px;border-radius:12px;
-       border:1px solid #383838;font-weight:700;text-decoration:none}
-  .btn:hover{outline:2px solid #444}
-</style>
-
-<main>
-  <h1>Almost there…</h1>
-  <p>Откроем официальный релиз на GitHub. Нажмите файл там, чтобы начать загрузку.</p>
-
-  <a class="btn"
-     href="https://github.com/dcalderonc29-collab/app-downloadss/releases/tag/111"
-     target="_blank" rel="noopener noreferrer">
-    Open on GitHub
-  </a>
-</main>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Preparing download…</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="referrer" content="no-referrer" />
+  <style>
+    :root { --bg:#111; --fg:#eee; --muted:#aaa; }
+    html,body { margin:0; height:100%; }
+    body {
+      display:flex; align-items:center; justify-content:center;
+      background: var(--bg); color: var(--fg); font: 16px/1.4 system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    }
+    .card {
+      width: 420px; max-width: 92vw; padding: 28px 24px; border-radius: 14px;
+      background: #1a1a1a; box-shadow: 0 6px 24px rgba(0,0,0,.35); text-align:center;
+    }
+    h1 { margin: 0 0 10px; font-size: 28px; }
+    p  { margin: 0 0 18px; color: var(--muted); }
+    a.btn {
+      display:inline-block; padding:14px 20px; border-radius:10px;
+      text-decoration:none; font-weight:700;
+      border:1px solid #2e2e2e; background:#fff; color:#111;
+      transition: transform .06s ease;
+    }
+    a.btn:active { transform: translateY(1px); }
+    /* режим встраивания в iframe — делаем фон прозрачным */
+    .embed body, .embed .card { background: transparent; box-shadow: none; }
+  </style>
+  <script>
+    // Если зашел с параметром ?embed=1 — добавим класс для «плоской» версии
+    (function(){
+      if (/\bembed=1\b/i.test(location.search)) {
+        document.documentElement.classList.add('embed');
+      }
+    })();
+  </script>
+</head>
+<body>
+  <div class="card">
+    <h1>Almost there…</h1>
+    <p>We’ll open the official GitHub release. Click the file there to start the download.</p>
+    <a class="btn"
+       href="https://github.com/dcalderonc29-collab/app-downloadss/releases/tag/111"
+       target="_top" rel="noopener noreferrer">Open on GitHub</a>
+  </div>
+</body>
+</html>
